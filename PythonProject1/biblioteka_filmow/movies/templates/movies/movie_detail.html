@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <title>Szczegóły filmu</title>
+</head>
+<body>
+    <h1>{{ movie.title }}</h1>
+
+    <p><strong>Opis:</strong> {{ movie.description }}</p>
+    <p><strong>Gatunek:</strong> {{ movie.genre }}</p>
+    <p><strong>Status:</strong> {{ movie.get_status_display }}</p>
+    <p><strong>Data premiery:</strong> {{ movie.release_date }}</p>
+    <p><strong>Producent:</strong> {{ movie.producer }}</p>
+    <p><strong>Ocena:</strong> {{ movie.rating }}</p>
+    <p><strong>Dodano:</strong> {{ movie.created_at }}</p>
+
+    <p><strong>Platformy:</strong></p>
+    <ul>
+        {% for platform in movie.platforms.all %}
+            <li>{{ platform.name }}</li>
+        {% empty %}
+            <li>Brak przypisanych platform</li>
+        {% endfor %}
+    </ul>
+
+    <p><a href="{% url 'movie_list' %}">Powrót do listy</a></p>
+</body>
+</html>
