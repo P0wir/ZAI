@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+
+{% block title %}
+Formularz filmu
+{% endblock %}
+
+{% block content %}
+<h2 class="mb-4">
+    {% if object %}
+        Edytuj film
+    {% else %}
+        Dodaj film
+    {% endif %}
+</h2>
+
+<form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit" class="btn btn-primary">Zapisz</button>
+    <a href="{% url 'movie_list' %}" class="btn btn-secondary">Anuluj</a>
+</form>
+{% endblock %}

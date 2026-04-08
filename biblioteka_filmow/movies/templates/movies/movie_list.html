@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+
+{% block title %}
+Lista filmów
+{% endblock %}
+
+{% block content %}
+<h1 class="mb-4">🎬 Lista filmów</h1>
+
+<a href="{% url 'movie_add' %}" class="btn btn-success mb-4">+ Dodaj film</a>
+
+{% if movies %}
+    <div class="row">
+        {% for movie in movies %}
+            <div class="col-md-4 mb-4">
+                <div class="card h-100 shadow-sm">
+                    <div class="card-body">
+                        <h5 class="card-title">
+                            <a href="{% url 'movie_detail' movie.pk %}">
+                                {{ movie.title }}
+                            </a>
+                        </h5>
+
+                        <p class="card-text">
+                            <strong>Gatunek:</strong> {{ movie.genre }}<br>
+                            <strong>Status:</strong> {{ movie.get_status_display }}<br>
+                            <strong>Data:</strong> {{ movie.release_date }}
+                        </p>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+{% else %}
+    <div class="alert alert-warning">
+        Brak filmów w bazie.
+    </div>
+{% endif %}
+
+{% endblock %}
