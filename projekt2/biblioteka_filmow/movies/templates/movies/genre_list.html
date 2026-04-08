@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h2>Lista gatunków</h2>
+
+<p>
+    <a href="{% url 'genre_add' %}">Dodaj gatunek</a>
+</p>
+
+<ul>
+    {% for genre in genres %}
+        <li>
+            <a href="{% url 'genre_detail' genre.pk %}">{{ genre.name }}</a>
+        </li>
+    {% empty %}
+        <li>Brak gatunków.</li>
+    {% endfor %}
+</ul>
+{% endblock %}

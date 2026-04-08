@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+
+{% block title %}
+{{ movie.title }}
+{% endblock %}
+
+{% block content %}
+<h2>{{ movie.title }}</h2>
+
+<p><strong>Opis:</strong> {{ movie.description }}</p>
+<p><strong>Gatunek:</strong> {{ movie.genre }}</p>
+<p><strong>Status:</strong> {{ movie.get_status_display }}</p>
+<p><strong>Data premiery:</strong> {{ movie.release_date }}</p>
+<p><strong>Producent:</strong> {{ movie.producer }}</p>
+<p><strong>Ocena:</strong> {{ movie.rating }}</p>
+
+<h4>Platformy:</h4>
+<ul>
+    {% for platform in movie.platforms.all %}
+        <li>{{ platform.name }}</li>
+    {% empty %}
+        <li>Brak przypisanych platform.</li>
+    {% endfor %}
+</ul>
+
+<a href="{% url 'movie_edit' movie.pk %}" class="btn btn-warning">Edytuj</a>
+<a href="{% url 'movie_delete' movie.pk %}" class="btn btn-danger">Usuń</a>
+<a href="{% url 'movie_list' %}" class="btn btn-secondary">Powrót</a>
+{% endblock %}

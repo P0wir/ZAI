@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h2>{{ genre.name }}</h2>
+
+<p>Liczba filmów w tym gatunku: {{ genre.movies.count }}</p>
+
+<p>
+    <a href="{% url 'genre_edit' genre.pk %}">Edytuj</a> |
+    <a href="{% url 'genre_delete' genre.pk %}">Usuń</a> |
+    <a href="{% url 'genre_list' %}">Powrót do listy</a>
+</p>
+
+<h3>Filmy w tym gatunku:</h3>
+<ul>
+    {% for movie in genre.movies.all %}
+        <li>
+            <a href="{% url 'movie_detail' movie.pk %}">{{ movie.title }}</a>
+        </li>
+    {% empty %}
+        <li>Brak filmów w tym gatunku.</li>
+    {% endfor %}
+</ul>
+{% endblock %}
